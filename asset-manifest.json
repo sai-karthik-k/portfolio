@@ -1,15 +1,23 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.0e05fb14.css",
-    "main.js": "/portfolio/static/js/main.228861f3.js",
+    "main.js": "/portfolio/static/js/main.a254e1cf.js",
     "static/js/453.a7d99afe.chunk.js": "/portfolio/static/js/453.a7d99afe.chunk.js",
+    "static/media/mern.jpg": "/portfolio/static/media/mern.50e06092c361aa92faf8.jpg",
+    "static/media/Forests and their Management.jpg": "/portfolio/static/media/Forests and their Management.88a8c63b64db78ed1425.jpg",
+    "static/media/Conservation Economics.jpg": "/portfolio/static/media/Conservation Economics.0434e12180dd0467c010.jpg",
+    "static/media/Wild Life Ecology.jpg": "/portfolio/static/media/Wild Life Ecology.68913fab1574270904ea.jpg",
+    "static/media/Entrepreneurship.jpg": "/portfolio/static/media/Entrepreneurship.4889b7b016b0b03816ab.jpg",
+    "static/media/ml.jpg": "/portfolio/static/media/ml.34a7eeafadadb4a9cd74.jpg",
+    "static/media/aws.jpg": "/portfolio/static/media/aws.81c0c776778ca6a7b675.jpg",
+    "static/media/profile.jpg": "/portfolio/static/media/profile.4b0bf339dfba90aae841.jpg",
     "index.html": "/portfolio/index.html",
     "main.0e05fb14.css.map": "/portfolio/static/css/main.0e05fb14.css.map",
-    "main.228861f3.js.map": "/portfolio/static/js/main.228861f3.js.map",
+    "main.a254e1cf.js.map": "/portfolio/static/js/main.a254e1cf.js.map",
     "453.a7d99afe.chunk.js.map": "/portfolio/static/js/453.a7d99afe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0e05fb14.css",
-    "static/js/main.228861f3.js"
+    "static/js/main.a254e1cf.js"
   ]
 }
