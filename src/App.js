@@ -1,8 +1,29 @@
 import React, { useState, useEffect, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import './App.css';
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaBars, FaTimes, FaEye, FaCheckCircle } from 'react-icons/fa';
-// --- DATA SOURCE (Extracted from your Resume) ---
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaPhone,
+  FaBars,
+  FaTimes,
+  FaEye,
+  FaCheckCircle
+} from 'react-icons/fa';
+
+// --- ASSET IMPORTS ---
+import resume from "./assets/Resume.pdf";
+import profile from "./assets/profile.jpg";
+import aws from "./assets/certificate/aws.jpg";
+import ml from "./assets/certificate/ml.jpg";
+import mern from "./assets/certificate/mern.jpg";
+import conservation from "./assets/certificate/Conservation Economics.jpg";
+import entrepreneurship from "./assets/certificate/Entrepreneurship.jpg";
+import forests from "./assets/certificate/Forests and their Management.jpg";
+import wildlife from "./assets/certificate/Wild Life Ecology.jpg";
+
+// --- DATA SOURCE ---
 const resumeData = {
   header: {
     name: "SAI KARTHIK KRISHNAM",
@@ -136,37 +157,53 @@ const resumeData = {
       url: "https://ipl-score-prediction-karthik.streamlit.app/"
     }
   ],
-
   certifications: [
-    {
-      title: "AWS Certified Cloud Practitioner",
-      image: "/certificate/aws.jpg"
-    },
-    {
-      title: "Machine Learning with Python",
-      image: "/certificate/ml.jpg"
-    },
-    {
-      title: "MERN Full Stack (ETHNUS)",
-      image: "/certificate/mern.jpg"
-    },
-    {
-      title: "Conservation Economics",
-      image: "/certificate/Conservation Economics.jpg"
-    },
-    {
-      title: "Entrepreneurship",
-      image: "/certificate/Entrepreneurship.jpg"
-    },
-    {
-      title: "Forests and their Management",
-      image: "/certificate/Forests and their Management.jpg"
-    },
-    {
-      title: "Wild Life Ecology",
-      image: "/certificate/Wild Life Ecology.jpg"
-    }
+    { title: "AWS Certified Cloud Practitioner", image: aws },
+    { title: "Machine Learning with Python", image: ml },
+    { title: "MERN Full Stack (ETHNUS)", image: mern },
+    { title: "Conservation Economics", image: conservation },
+    { title: "Entrepreneurship", image: entrepreneurship },
+    { title: "Forests and their Management", image: forests },
+    { title: "Wild Life Ecology", image: wildlife }
   ]
+};
+
+// --- ANIMATION WRAPPER COMPONENT ---
+const Reveal = ({ children }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    // FIX: Capture the current value of the ref to a local variable
+    const currentElement = ref.current;
+
+    if (currentElement) {
+      observer.observe(currentElement);
+    }
+
+    return () => {
+      // FIX: Use the captured 'currentElement' variable in the cleanup
+      if (currentElement) {
+        observer.disconnect();
+      }
+    };
+  }, []);
+
+  return (
+    <div ref={ref} className={`reveal ${isVisible ? "active" : ""}`}>
+      {children}
+    </div>
+  );
 };
 
 // --- COMPONENTS ---
@@ -179,16 +216,17 @@ const Navbar = () => {
 
   const handleNavClick = (sectionId) => {
     setActiveSection(sectionId);
-    setIsOpen(false); // Close mobile menu if open
+    setIsOpen(false);
   };
 
-  // Scroll detection logic (kept the same as your previous requests)
   useEffect(() => {
     const handleScroll = () => {
+      // Check if user is at the bottom of the page (Fix for Contact)
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
         setActiveSection('contact');
         return;
       }
+
       const sections = ['home', 'about', 'skills', 'projects', 'experience', 'certifications', 'contact'];
       for (let i = 0; i < sections.length; i++) {
         const sectionId = sections[i];
@@ -206,28 +244,22 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const getLinkClass = (section) => {
-    return activeSection === section ? 'active' : '';
-  };
+  const getLinkClass = (section) => activeSection === section ? 'active' : '';
 
   return (
     <nav className="navbar">
       <div className="logo">SK</div>
-
-      {/* --- FIX START: Logic to toggle between X and Bars icons --- */}
       <div className="menu-icon" onClick={toggleMenu}>
         {isOpen ? <FaTimes /> : <FaBars />}
       </div>
-      {/* --- FIX END --- */}
-
       <ul className={isOpen ? "nav-links active" : "nav-links"}>
-        <li><a href="#home" className={getLinkClass('home')} onClick={() => handleNavClick('home')}>Home</a></li>
-        <li><a href="#about" className={getLinkClass('about')} onClick={() => handleNavClick('about')}>About</a></li>
-        <li><a href="#skills" className={getLinkClass('skills')} onClick={() => handleNavClick('skills')}>Skills</a></li>
-        <li><a href="#projects" className={getLinkClass('projects')} onClick={() => handleNavClick('projects')}>Projects</a></li>
-        <li><a href="#experience" className={getLinkClass('experience')} onClick={() => handleNavClick('experience')}>Experience</a></li>
-        <li><a href="#certifications" className={getLinkClass('certifications')} onClick={() => handleNavClick('certifications')}>Certifications</a></li>
-        <li><a href="#contact" className={getLinkClass('contact')} onClick={() => handleNavClick('contact')}>Contact</a></li>
+        {['home', 'about', 'skills', 'projects', 'experience', 'certifications', 'contact'].map(item => (
+          <li key={item}>
+            <a href={`#${item}`} className={getLinkClass(item)} onClick={() => handleNavClick(item)}>
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </a>
+          </li>
+        ))}
       </ul>
     </nav>
   );
@@ -236,173 +268,140 @@ const Navbar = () => {
 const Home = () => (
   <section id="home" className="hero-section">
     <div className="hero-container">
-      {/* Left: Text */}
       <div className="hero-content">
-        <h1>{resumeData.header.name}</h1>
-        <h2>{resumeData.header.title}</h2>
-        <p className="tagline">Java | Python | SpringBoot | AI/ML</p>
-
-        <div className="hero-buttons">
-          <a
-            href="/Resume.pdf"
-            download
-            className="btn secondary"
-          >
-            Download CV
-          </a>
-
-          <a href="#contact" className="btn secondary">
-            Contact Me
-          </a>
-
-          <a href="#projects" className="btn secondary">
-            View Work
-          </a>
+        <h1 className="animate-hero">{resumeData.header.name}</h1>
+        <h2 className="animate-hero delay-100">{resumeData.header.title}</h2>
+        <p className="tagline animate-hero delay-200">Java | Python | SpringBoot | AI/ML</p>
+        <div className="hero-buttons animate-hero delay-300">
+          <a href={resume} download className="btn secondary">Download CV</a>
+          <a href="#contact" className="btn primary">Contact Me</a>
+          <a href="#projects" className="btn secondary">View Work</a>
         </div>
-
       </div>
-
-      {/* Right: Profile Image */}
-      <div className="hero-image">
-        <img
-          src="/profile.jpg"
-          alt="Sai Karthik Krishnam"
-        />
+      <div className="hero-image animate-hero delay-200">
+        <img src={profile} alt="Sai Karthik Krishnam" />
       </div>
     </div>
   </section>
 );
 
-
 const About = () => (
   <section id="about" className="section-container">
-    <h2 className="section-title">About Me</h2>
-    <div className="about-content">
-      <div className="summary-box">
-        <h3>Professional Summary</h3>
-        <p>{resumeData.about.summary}</p>
+    <Reveal>
+      <h2 className="section-title">About Me</h2>
+      <div className="about-content">
+        <div className="summary-box">
+          <h3>Professional Summary</h3>
+          <p>{resumeData.about.summary}</p>
+        </div>
+        <div className="education-box">
+          <h3>Education</h3>
+          {resumeData.about.education.map((edu, index) => (
+            <div key={index} className="edu-item">
+              <h4>{edu.school}</h4>
+              <p className="highlight">{edu.degree}</p>
+              <p className="edu-meta">{edu.year} | {edu.score}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="education-box">
-        <h3>Education</h3>
-        {resumeData.about.education.map((edu, index) => (
-          <div key={index} className="edu-item">
-            <h4>{edu.school}</h4>
-            <p className="edu-degree">{edu.degree}</p>
-            <p className="edu-meta">{edu.year} | <span className="highlight">{edu.score}</span></p>
-          </div>
-        ))}
-      </div>
-    </div>
+    </Reveal>
   </section>
 );
 
 const Skills = () => (
-  <section id="skills" className="section-container bg-alt">
-    <h2 className="section-title">Technical Skills</h2>
-    <div className="skills-grid">
-      {Object.entries(resumeData.skills).map(([category, items]) => (
-        <div key={category} className="skill-card">
-          <h3 className="capitalize">{category.replace('_', ' / ')}</h3>
-          <div className="tags">
-            {items.map(skill => <span key={skill} className="tag">{skill}</span>)}
+  <section id="skills" className="section-container">
+    <Reveal>
+      <h2 className="section-title">Technical Skills</h2>
+      <div className="skills-grid">
+        {Object.entries(resumeData.skills).map(([category, items]) => (
+          <div key={category} className="skill-card">
+            <h3 className="capitalize">{category.replace('_', ' / ')}</h3>
+            <div className="tags">
+              {items.map(skill => <span key={skill} className="tag">{skill}</span>)}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Reveal>
   </section>
 );
 
 const Projects = () => (
-  <section id="projects" className="section-container">
-    <h2 className="section-title">Projects</h2>
-    <div className="projects-grid">
-      {resumeData.projects.map((project, index) => (
-        <div key={index} className="project-card">
-          <h3>{project.title}</h3>
-          <p className="tech-stack">
-            <strong>Tech:</strong> {project.tech}
-          </p>
-
-          <ul className="project-details">
-            {project.details.map((point, i) => (
-              <li key={i}>{point}</li>
-            ))}
-          </ul>
-
-          {/* Visit Project Button */}
-          <div style={{ marginTop: "1.5rem" }}>
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noreferrer"
-              className="btn primary"
-            >
+  <section id="projects" className="section-container bg-alt">
+    <Reveal>
+      <h2 className="section-title">Projects</h2>
+      <div className="projects-grid">
+        {resumeData.projects.map((project, index) => (
+          <div key={index} className="project-card">
+            <h3>{project.title}</h3>
+            <p className="tech-stack"><em>Tech:</em> {project.tech}</p>
+            <ul className="project-details">
+              {project.details.map((point, i) => <li key={i}>{point}</li>)}
+            </ul>
+            <a href={project.url} target="_blank" rel="noreferrer" className="btn primary" style={{ marginTop: '1rem', display: 'inline-block' }}>
               Visit Project
             </a>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Reveal>
   </section>
 );
 
-
 const Experience = () => (
-  <section id="experience" className="section-container bg-alt">
-    <h2 className="section-title">Experience</h2>
-    <div className="timeline">
-      {resumeData.experience.map((exp, index) => (
-        <div key={index} className="timeline-item">
-          <div className="timeline-header">
-            <h3>{exp.role}</h3>
-            <h4>{exp.company}</h4>
-            <span className="date">{exp.duration}</span>
+  <section id="experience" className="section-container">
+    <Reveal>
+      <h2 className="section-title">Experience</h2>
+      <div className="timeline">
+        {resumeData.experience.map((exp, index) => (
+          <div key={index} className="timeline-item">
+            <div className="timeline-header">
+              <div>
+                <h3>{exp.role}</h3>
+                <h4>{exp.company}</h4>
+              </div>
+              <span className="date">{exp.duration}</span>
+            </div>
+            <ul className="timeline-body">
+              {exp.points.map((pt, i) => <li key={i}>{pt}</li>)}
+            </ul>
           </div>
-          <ul className="timeline-body">
-            {exp.points.map((pt, i) => <li key={i}>{pt}</li>)}
-          </ul>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Reveal>
   </section>
 );
 
 const Certifications = () => (
   <section id="certifications" className="section-container">
-    <h2 className="section-title">Certifications</h2>
-    <div className="cert-grid">
-      {resumeData.certifications.map((cert, index) => (
-        <div key={index} className="cert-card">
-
-          {/* Image Wrapper for Hover/Click functionality */}
-          <div
-            className="cert-img-wrapper"
-            onClick={() => window.open(cert.image, "_blank")}
-            title="Click to view certificate"
-          >
-            <img src={cert.image} alt={cert.title} className="cert-icon" />
-
-            {/* Overlay that appears on hover */}
-            <div className="cert-overlay">
-              <FaEye className="overlay-icon" />
+    <Reveal>
+      <h2 className="section-title">Certifications</h2>
+      <div className="cert-grid">
+        {resumeData.certifications.map((cert, index) => (
+          <div key={index} className="cert-card">
+            <div
+              className="cert-img-wrapper"
+              onClick={() => window.open(cert.image, "_blank")}
+              title="Click to view certificate"
+            >
+              <img src={cert.image} alt={cert.title} className="cert-icon" />
+              <div className="cert-overlay">
+                <FaEye className="overlay-icon" />
+              </div>
             </div>
+            <p>{cert.title}</p>
           </div>
-
-          <p>{cert.title}</p>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Reveal>
   </section>
 );
 
-
 const Contact = () => {
   const formRef = useRef();
-  // State to control the visibility of the popup
   const [showPopup, setShowPopup] = useState(false);
   const [isSending, setIsSending] = useState(false);
-
-  // Timestamp logic for EmailJS
   const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
 
   const sendEmail = (e) => {
@@ -412,23 +411,21 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_i2dy61l",     // Your Service ID
-        "template_i26zlpn",    // Your Template ID
+        "service_i2dy61l",     // Service ID
+        "template_i26zlpn",    // Template ID
         formRef.current,
-        "IlRUEFEB3HSnLLtU9"    // Your Public Key
+        "IlRUEFEB3HSnLLtU9"    // Public Key
       )
       .then(
         () => {
           setIsSending(false);
-          setShowPopup(true); // Trigger the popup
-          e.target.reset();   // Clear the form
-
-          // Auto-close popup after 4 seconds
+          setShowPopup(true);
+          e.target.reset();
           setTimeout(() => setShowPopup(false), 4000);
         },
         (error) => {
           setIsSending(false);
-          alert("Failed to send message. Please try again."); // Fallback for errors
+          alert("Failed to send message. Please try again.");
           console.error("FAILED...", error);
         }
       );
@@ -437,46 +434,40 @@ const Contact = () => {
   return (
     <section id="contact" className="section-container footer-section">
       <h2 className="section-title">Get In Touch</h2>
-
       <div className="contact-content">
-        {/* LEFT SIDE: Contact Info */}
         <div className="contact-left">
           <h3>Let's Connect</h3>
           <p>I am currently open to new opportunities. Feel free to reach out!</p>
           <div className="contact-info-list">
-            <a href="tel:+919618704949" className="contact-row">
-              <FaPhone /> +91 9618704949
+            <a href={`tel:${resumeData.header.contact.phone}`} className="contact-row">
+              <FaPhone /> {resumeData.header.contact.phone}
             </a>
-            <a href="mailto:saikarthikkrishnam2003@gmail.com" className="contact-row">
-              <FaEnvelope /> saikarthikkrishnam2003@gmail.com
+            <a href={`mailto:${resumeData.header.contact.email}`} className="contact-row">
+              <FaEnvelope /> {resumeData.header.contact.email}
             </a>
-            <a href="https://linkedin.com/in/sai-karthik-k" target="_blank" rel="noreferrer" className="contact-row">
+            <a href={resumeData.header.contact.linkedin} target="_blank" rel="noreferrer" className="contact-row">
               <FaLinkedin /> LinkedIn Profile
             </a>
-            <a href="https://github.com/sai-karthik-k" target="_blank" rel="noreferrer" className="contact-row">
+            <a href={resumeData.header.contact.github} target="_blank" rel="noreferrer" className="contact-row">
               <FaGithub /> GitHub Profile
             </a>
           </div>
         </div>
 
-        {/* RIGHT SIDE: Form */}
         <div className="contact-right">
           <form className="contact-form" ref={formRef} onSubmit={sendEmail}>
             <input type="hidden" name="time" value={currentTime} />
             <input type="text" name="name" placeholder="Your Name" required />
             <input type="email" name="email" placeholder="Your Email" required />
             <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
-
             <button type="submit" className="btn primary" disabled={isSending}>
               {isSending ? "Sending..." : "Send Message"}
             </button>
           </form>
         </div>
       </div>
-
       <p className="copyright">© 2025 Sai Karthik Krishnam. Built with React.</p>
 
-      {/* --- POPUP ANIMATION COMPONENT --- */}
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup-content">
