@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fa';
 
 // --- ASSET IMPORTS ---
-import resume from "./assets/Resume.pdf";
+// import resume from "./assets/Resume.pdf";
 import profile from "./assets/profile.jpg";
 import aws from "./assets/certificate/aws.jpg";
 import ml from "./assets/certificate/ml.jpg";
@@ -36,7 +36,7 @@ const resumeData = {
     }
   },
   about: {
-    summary: "I am a dedicated Software Developer with experience in backend engineering, machine learning, and full-stack development. My work spans microservices using Java + Spring Boot, ML models built with TensorFlow & Scikit-Learn, and user-friendly applications using React and Node.js. With strong foundations in DSA, OOP, OS, and system design, I enjoy building efficient, scalable systems. I’m also an AWS Certified Cloud Practitioner, allowing me to build and deploy cloud-ready solutions. I am driven by problem-solving, clean architecture, and continuous innovation.",
+    summary: "I am a dedicated Software Engineer with experience in backend engineering, machine learning, and full-stack development. My work spans microservices using Java + Spring Boot, ML models built with TensorFlow & Scikit-Learn, and user-friendly applications using React and Node.js. With strong foundations in DSA, OOP, OS, and system design, I enjoy building efficient, scalable systems. I’m also an AWS Certified Cloud Practitioner, allowing me to build and deploy cloud-ready solutions. I am driven by problem-solving, clean architecture, and continuous innovation.",
     education: [
       {
         school: "Vellore Institute of Technology, Vellore",
@@ -72,14 +72,25 @@ const resumeData = {
       company: "Encora",
       duration: "Aug 2025 – Present",
       points: [
+        "Developed an offline AI solution to generate QA test cases from large product manuals and identify missing coverage by semantically comparing them with existing TestRail test cases. Implemented document cleaning, intelligent chunking, LLM-based generation, and embedding-based semantic comparison to improve test coverage visibility.",
         "Training in Java Full Stack, Spring Boot Microservices, REST APIs, and React.",
         "Implementing scalable backend components following industry best practices.",
-        "Developed an offline AI solution to generate QA test cases from large product manuals and identify missing coverage by semantically comparing them with existing TestRail test cases. Implemented document cleaning, intelligent chunking, LLM-based generation, and embedding-based semantic comparison to improve test coverage visibility.",
         "Experience with version control, CI/CD workflows, and software quality processes."
       ]
     }
   ],
   projects: [
+    {
+      title: "AI Test Case Generator using RAG",
+      tech: "Python | RAG | Llama 3 ",
+      details: [
+        "Built an AI-powered system to automatically generate structured manual test cases from product documentation and bug reports.",
+        "Implemented Retrieval-Augmented Generation (RAG) using vector embeddings and FAISS for semantic document retrieval.",
+        "Integrated local LLM (Llama 3 via Ollama) to generate TestRail-compatible test cases including steps, preconditions, and expected results.",
+        "Processed PDF manuals, JIRA exports, and existing test cases to improve test coverage and avoid duplicate scenarios."
+      ],
+      url: "https://github.com/sai-karthik-k/test-case-generator"
+    },
     {
       title: "E-Commerce Microservices System",
       tech: "Java | Spring Boot | Microservices",
@@ -273,7 +284,14 @@ const Home = () => (
         <h2 className="animate-hero delay-100">{resumeData.header.title}</h2>
         <p className="tagline animate-hero delay-200">Java | Python | SpringBoot | AI/ML</p>
         <div className="hero-buttons animate-hero delay-300">
-          <a href={resume} download className="btn secondary">Download CV</a>
+          <a
+            href={`${process.env.PUBLIC_URL}/Resume.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn secondary"
+          >
+            Download CV
+          </a>
           <a href="#contact" className="btn primary">Contact Me</a>
           <a href="#projects" className="btn secondary">View Work</a>
         </div>
@@ -466,7 +484,7 @@ const Contact = () => {
           </form>
         </div>
       </div>
-      <p className="copyright">© 2025 Sai Karthik Krishnam. Built with React.</p>
+      <p className="copyright">© 2026 Sai Karthik Krishnam. Built with React.</p>
 
       {showPopup && (
         <div className="popup-overlay">
