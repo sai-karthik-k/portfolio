@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.ccc0f204.css",
-    "main.js": "/portfolio/static/js/main.5fbf1002.js",
+    "main.js": "/portfolio/static/js/main.eb8f4c50.js",
     "static/js/453.a7d99afe.chunk.js": "/portfolio/static/js/453.a7d99afe.chunk.js",
     "static/media/mern.jpg": "/portfolio/static/media/mern.50e06092c361aa92faf8.jpg",
     "static/media/Forests and their Management.jpg": "/portfolio/static/media/Forests and their Management.88a8c63b64db78ed1425.jpg",
@@ -13,11 +13,11 @@
     "static/media/profile.jpg": "/portfolio/static/media/profile.4b0bf339dfba90aae841.jpg",
     "index.html": "/portfolio/index.html",
     "main.ccc0f204.css.map": "/portfolio/static/css/main.ccc0f204.css.map",
-    "main.5fbf1002.js.map": "/portfolio/static/js/main.5fbf1002.js.map",
+    "main.eb8f4c50.js.map": "/portfolio/static/js/main.eb8f4c50.js.map",
     "453.a7d99afe.chunk.js.map": "/portfolio/static/js/453.a7d99afe.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ccc0f204.css",
-    "static/js/main.5fbf1002.js"
+    "static/js/main.eb8f4c50.js"
   ]
 }
