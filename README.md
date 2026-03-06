@@ -1,70 +1,175 @@
-# Getting Started with Create React App
+# 🌐 Personal Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern **developer portfolio website** built using **React.js** to showcase my projects, technical skills, experience, certifications, and contact information.
 
-## Available Scripts
+This portfolio highlights my work in **Software Engineering, Backend Development, Machine Learning, and Cloud Technologies**.
 
-In the project directory, you can run:
+🔗 **Live Portfolio:**
+https://sai-karthik-k.github.io/portfolio/
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# 👨‍💻 About Me
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Hi, I'm **Sai Karthik Krishnam**, a Software Engineer with experience in:
 
-### `npm test`
+* Backend Engineering
+* Machine Learning Systems
+* Full-Stack Development
+* Cloud & Microservices Architecture
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+I enjoy building **scalable systems, intelligent ML applications, and developer tools**.
 
-### `npm run build`
+Currently working as **Software Consultant at Encora**, focusing on **AI-driven automation systems and backend engineering**.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 🚀 Features
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This portfolio includes:
 
-### `npm run eject`
+* Responsive **modern UI**
+* Smooth **scroll navigation**
+* **Animated section reveals**
+* Professional **project showcase**
+* **Skills and technology stack**
+* **Experience timeline**
+* **Certification gallery**
+* **Contact form with EmailJS integration**
+* Downloadable **resume**
+* Fully **mobile responsive**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 🛠 Tech Stack
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Frontend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+* React.js
+* HTML5
+* CSS3
+* JavaScript
 
-## Learn More
+### Libraries
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+* React Icons
+* EmailJS
+* Intersection Observer API
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+* GitHub Pages
 
-### `npm run build` fails to minify
+### Development Tools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Git
+* GitHub
+* VS Code
+  
+---
+
+# 📸 Portfolio Sections
+
+The website includes the following sections:
+
+### Home
+
+Introduction and quick overview.
+
+### About
+
+Professional summary and education.
+
+### Skills
+
+Technical skill categories including:
+
+* Programming Languages
+* Backend Development
+* Frontend Development
+* Machine Learning
+* Cloud & Dev Tools
+
+### Projects
+
+Highlighted projects including:
+
+* AI Test Case Generator (RAG + LLM)
+* E-Commerce Microservices Platform
+* TinyLink URL Shortener
+* Image Forgery Detection System
+* Vehicle Rental System
+* Energy Consumption Analysis ML System
+* IPL Score Prediction Model
+
+### Experience
+
+Professional experience timeline.
+
+### Certifications
+
+Industry certifications including:
+
+* AWS Cloud Practitioner
+* Machine Learning
+* MERN Stack Development
+
+### Contact
+
+Integrated contact form with EmailJS.
+
+---
+
+# ⚙️ Installation & Setup
+
+Clone the repository:
+
+```bash
+git clone https://github.com/sai-karthik-k/portfolio.git
+```
+
+Navigate into the project:
+
+```bash
+cd portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm start
+```
+
+The application will run at:
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🚀 Deployment
+
+This portfolio is deployed using **GitHub Pages**.
+
+To deploy updates:
+
+```bash
+npm run deploy
+```
+
+This automatically:
+
+1. Builds the React project
+2. Pushes the build to the `gh-pages` branch
+3. Updates the live website
+
+---
+
+⭐ If you like this project, feel free to **star the repository**.
